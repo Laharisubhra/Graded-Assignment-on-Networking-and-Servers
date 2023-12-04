@@ -78,3 +78,35 @@ Step 10 :  if you try to launch  "http://awesomeweb.shop/" you will be able to f
 
 **********************************************************************************************************************************************************
 QUESTION 2
+
+The Python prigram  and the text file the Pythin program is going to use is added to teh main branch of the repo 
+
+Check the status of the website
+def check_status(website): try: request = requests.get(website) return request.status_code except requests.ConnectionError: return 'Website is down!'
+
+Check the status of the subdomains every minute
+def check_subdomains(): subdomains = get_subdomains() while True: clear() table = prettytable.PrettyTable(['Subdomain', 'Status']) for subdomain in subdomains: status = check_status(subdomain) table.add_row([subdomain, status]) print(table) time.sleep(60)
+
+Get the list of subdomains from the text file
+def get_subdomains(): subdomains = [] with open('subdomains.txt', 'r') as file: for line in file: subdomains.append(line.strip()) return subdomains
+
+
+if name == 'main': check_subdomains()
+
+Here the python file name is 
+Subdomain_status_check.py
+
+And teh domain containing file name is 
+subdomains.txt
+
+
+In the code above, we are using the following libraries:
+
+1> os: Provides a way to interact with the operating system.
+2> requests: A powerful library for making HTTP requests.
+3> time: A library that allows you to deal with time and delays.
+4> prettytable: A library for easily displaying data in a tabular format.
+5> datetime: A library that provides functions to work with dates and times.
+
+PIP install library name
+
