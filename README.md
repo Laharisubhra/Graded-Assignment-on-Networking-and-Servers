@@ -110,3 +110,71 @@ In the code above, we are using the following libraries:
 
 PIP install library name
 
+*********************************************************************************************************************************************************
+Question 3 
+
+Step 1:Create and deploy an AWS windows VM and login to it with teh private key 
+
+Step 2: Download VirtualBox
+
+Go to the official VirtualBox website: https://www.virtualbox.org/
+
+Click on the "Downloads" link 
+
+Step 3: Choose the Correct Package
+
+Step 4: Install VirtualBox For Windows
+
+Step 5: Post-installation Configuration add your user account to the  "VirtualBox Users" group (Windows) to grant permissions to manage VMs.
+
+Step 6: Launch VirtualBox
+
+Step 7: Before starting the virtual machine, you need to download an Ubuntu 22.04 image from the OSboxes website (https://www.osboxes.org/ubuntu/). After downloading the image, open VirtualBox and select the newly created virtual machine. Go to "Settings" > "Storage" and click on the empty optical drive icon. Choose "Choose/Create a Disk Image" and select the downloaded Ubuntu 22.04 image.
+
+Step 8: Start the virtual machine by clicking on the "Start" button. Follow the Ubuntu installation prompts to complete the setup process.
+
+Step 9: Once the Ubuntu virtual machine is up and running, open the terminal and update the system by running the following commands:
+
+
+sudo apt update
+sudo apt upgrade
+Step 10: Install Nginx by running the following command:
+
+sudo apt install nginx
+
+Step 11: Configure Nginx to host a website from  Nginx configuration at /etc/nginx/sites-available/default.
+sudo nano /etc/nginx/sites-available/default
+Replace the contents of the file with the following configuration, adjusting the "server_name" and "root" values to match your website:
+
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    root /var/www/html;
+    index index.html index.htm index.nginx-debian.html;
+
+    server_name example.com www.example.com;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}
+Save  and exit and Restart Nginx to apply  configuration:
+
+sudo systemctl restart nginx
+
+Step 12: Transfer your website files to the Ubuntu virtual machine. You can use the scp command for this purpose:
+
+
+scp -r /path/to/your/website/ root@<IP_Address_of_Ubuntu_VM>:/var/www/html
+
+Step 13: Open a web browser on your host machine and enter the IP address of the Ubuntu virtual machine in the address bar. You should now be able to view your website hosted on the Nginx server inside the virtual machine.
+
+Step 14: Install Nmap on your host machine 
+
+sudo apt install nmap
+Step 15: Scan the Ubuntu virtual machine for open ports using Nmap:
+
+nmap ubuntu vm ip adress 
+
+
